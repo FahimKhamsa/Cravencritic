@@ -65,7 +65,7 @@ const UserLayout = ({ children }: UserLayoutProps) => {
           </ListItemIcon>
           <ListItemText primary="Profile" />
         </ListItem>
-        <ListItem button onClick={() => navigate("/user/restaurants")}>
+        <ListItem button onClick={() => navigate("/restaurants/all")}>
           <ListItemIcon>
             <RestaurantIcon />
           </ListItemIcon>

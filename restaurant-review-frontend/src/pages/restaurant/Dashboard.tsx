@@ -49,7 +49,7 @@ const Dashboard = () => {
       <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
         <Box sx={{ mb: 4 }}>
           <Typography variant="h4" component="h1" gutterBottom>
-            Restaurant Dashboard
+            My Restaurants
           </Typography>
           {restaurants.length === 0 ? (
             <Paper sx={{ p: 4, textAlign: 'center' }}>

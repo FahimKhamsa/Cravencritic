@@ -68,7 +68,7 @@ const Profile = () => {
       ]);
       setRestaurant(restaurantRes);
       console.log(restaurant);
-      setEditedRestaurant(restaurantRes.data);
+      setEditedRestaurant(restaurantRes);
       setReviews(reviewsRes.data);
     } catch (error) {
       enqueueSnackbar("Failed to load restaurant data", { variant: "error" });

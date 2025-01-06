@@ -32,6 +32,8 @@ import api from './axios-config';
 // };
 
 export const reviewAPI = {
+  getAll: () => api.get("/reviews/"),
+  getUserReviews: (userId: string) => api.get(`/reviews/?user_id=${userId}`),
   getByRestaurant: (restaurantId: string) =>
     api.get(`/reviews/?restaurant_id=${restaurantId}`),
   create: (data: any) => api.post("/reviews/", data),

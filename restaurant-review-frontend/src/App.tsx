@@ -14,6 +14,8 @@ import UserDashboard from './pages/user/Dashboard';
 import RestaurantRepDashboard from './pages/restaurant/Dashboard';
 import RestaurantProfile from './pages/restaurant/Profile';
 import RestaurantCreate from './pages/restaurant/Create';
+import AllRestaurants from './pages/restaurant/AllRestaurants';
+import UserReviews from './pages/user/UserReviews';
 import UserProfile from './pages/user/Profile';
 import AdminProfile from './pages/admin/Profile';
 import RestaurantList from './pages/admin/RestaurantList';
@@ -48,10 +50,11 @@ function App() {
               {/* User Routes */}
               <Route path="/user/dashboard" element={<UserDashboard />} />
               <Route path="/user/profile" element={<UserProfile />} />
-              {/* <Route path="/user/reviews" element={<UserReviews />} /> */}
+              <Route path="/user/reviews" element={<UserReviews />} />
               
               {/* Restaurant Rep Routes */}
               <Route path="/restaurants/dashboard" element={<RestaurantRepDashboard />} />
+              <Route path="/restaurants/all" element={<AllRestaurants />} />
               <Route path="/restaurants/:id" element={<RestaurantProfile />} />
               <Route path="/restaurants/create" element={<RestaurantCreate />} />
             </Routes>

@@ -14,6 +14,7 @@ import { useSnackbar } from 'notistack';
 import UserLayout from '../../components/layouts/UserLayout';
 import { useAuth } from '../../contexts/AuthContext';
 import { userAPI } from '../../services/api/user.api';
+import { restaurantAPI } from '../../services/api/restaurant.api';
 
 interface UserProfile {
   username: string;
@@ -27,6 +28,8 @@ interface UserProfile {
 const Profile = () => {
   const { user } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
+  const [restaurantsCount, setRestaurantsCount] = useState(0);
+  const [requestsCount, setRequestsCount] = useState(0);
   const [profile, setProfile] = useState<UserProfile>({
     username: '',
     email: '',
@@ -36,18 +39,36 @@ const Profile = () => {
     pending_reviews: 0,
   });
   const [isEditing, setIsEditing] = useState(false);
+  
+  const fetchProfile = async () => {
+    try {
+      const response = await userAPI.getProfile(user.id);
+      setProfile(response.data);
+    } catch (error) {
+      enqueueSnackbar('Failed to load profile', { variant: 'error' });
+    }
+  };
+  const fetchUserRestaurants = async () => {
+    try {
+      const data = await restaurantAPI.getUserRestaurants(user.id);
+      setRestaurantsCount(data.length);
+    } catch (error) {
+      enqueueSnackbar('Failed to load restaurants', { variant: 'error' });
+    }
+  };
+  const fetchUserRequests = async () => {
+    try {
+      const data = await restaurantAPI.getUserRequests(user.id);
+      setRequestsCount(data.length);
+    } catch (error) {
+      enqueueSnackbar('Failed to load requests', { variant: 'error' });
+    }
+  };
 
   useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const response = await userAPI.getProfile(user.id);
-        setProfile(response.data);
-      } catch (error) {
-        enqueueSnackbar('Failed to load profile', { variant: 'error' });
-      }
-    };
-
     fetchProfile();
+    fetchUserRestaurants();
+    fetchUserRequests();
   }, [user.id]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -146,10 +167,10 @@ const Profile = () => {
                 <Card>
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
-                      Reviews Posted
+                      Restaurants Posted
                     </Typography>
                     <Typography variant="h3">
-                      {profile.review_count}
+                      {restaurantsCount}
                     </Typography>
                   </CardContent>
                 </Card>
@@ -158,10 +179,10 @@ const Profile = () => {
                 <Card>
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
-                      Pending Reviews
+                      Pending Requests
                     </Typography>
                     <Typography variant="h3" color="warning.main">
-                      {profile.pending_reviews}
+                      {requestsCount}
                     </Typography>
                   </CardContent>
                 </Card>

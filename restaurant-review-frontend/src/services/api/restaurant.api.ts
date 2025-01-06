@@ -7,7 +7,11 @@ export const restaurantAPI = {
   },
   getUserRestaurants: async (userId: string): Promise<any[]> => {
     const allRestaurants = await restaurantAPI.getAll();
-    return allRestaurants.filter((restaurant: any) => restaurant.representative === userId);
+    return allRestaurants.filter((restaurant: any) => restaurant.representative === userId && restaurant.is_pending === false);
+  },
+  getUserRequests: async (userId: string): Promise<any[]> => {
+    const allRestaurants = await restaurantAPI.getAll();
+    return allRestaurants.filter((restaurant: any) => restaurant.representative === userId && restaurant.is_pending === true);
   },
   getOne: async (id: string): Promise<any> => {
     const response = await api.get(`/restaurants/${id}/`);
