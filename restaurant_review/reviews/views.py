@@ -66,4 +66,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
         return self.queryset
 
     def perform_create(self, serializer):
-        serializer.save()
+        review = serializer.save()
+        user = self.request.user
+        user.earned_points += 5
+        user.save()

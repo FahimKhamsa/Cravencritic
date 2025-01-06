@@ -20,9 +20,7 @@ interface UserProfile {
   username: string;
   email: string;
   contact_info: string;
-  points: number;
-  review_count: number;
-  pending_reviews: number;
+  earned_points: number;
 }
 
 const Profile = () => {
@@ -34,9 +32,7 @@ const Profile = () => {
     username: '',
     email: '',
     contact_info: '',
-    points: 0,
-    review_count: 0,
-    pending_reviews: 0,
+    earned_points: 0,
   });
   const [isEditing, setIsEditing] = useState(false);
   
@@ -155,10 +151,10 @@ const Profile = () => {
                 <Card>
                   <CardContent>
                     <Typography variant="h6" gutterBottom>
-                      Points Earned
+                      Points Earned (5 per each review)
                     </Typography>
                     <Typography variant="h3" color="primary">
-                      {profile.points}
+                      {profile.earned_points}
                     </Typography>
                   </CardContent>
                 </Card>
